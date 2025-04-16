@@ -51,13 +51,13 @@ class PersonTest {
     void addPet() {
         Person ma = new Person("Annie","Smid", 26, Person.Sex.FEMALE);
         Pet hond = new Pet("Woef", 5, Pet.Species.DOG);
-        Pet cat = new Pet("Poes", 3, Pet.Species.CAT);
+        Pet kat = new Pet("Poes", 3, Pet.Species.CAT);
 
         ma.addPet(hond);
-        ma.addPet(cat);
+        ma.addPet(kat);
 
         assertEquals(hond, ma.getPets().get(0));
-        assertEquals(cat, ma.getPets().get(1));
+        assertEquals(kat, ma.getPets().get(1));
 
 
     }
@@ -80,5 +80,61 @@ class PersonTest {
         assertEquals(kleinkind1, opa.getGrandChildren().get(0));
         assertEquals(kleinkind2, opa.getGrandChildren().get(1));
         assertEquals(kleinkind3, opa.getGrandChildren().get(2));
+    }
+
+    @Test
+    void getGrandPets() {
+        Person opa = new Person("Hilbrand", "Smid", 60, Person.Sex.MALE);
+        Person kind1 = new Person("Henk", "Smid", 28, Person.Sex.MALE);
+        Person kleinkind1 = new Person("Jan", "Smid", 3, Person.Sex.MALE);
+        Person kleinkind2 = new Person("Petra", "Smid", 4, Person.Sex.FEMALE);
+        Person kind2 = new Person("Joke","Jansen", 26, Person.Sex.FEMALE);
+        Person kleinkind3 = new Person("Otto", "Jansen", 3, Person.Sex.MALE);
+        Pet hond = new Pet("Woef", 5, Pet.Species.DOG);
+        Pet kat = new Pet("Poes", 3, Pet.Species.CAT);
+        Pet konijn = new Pet("Zoef", 2, Pet.Species.RABBIT);
+        Pet kanarie = new Pet("Tweety", 1, Pet.Species.BIRD);
+
+        kleinkind1.addPet(hond);
+        kleinkind2.addPet(kat);
+        kleinkind3.addPet(konijn);
+        kleinkind3.addPet(kanarie);
+        kind1.addChild(kleinkind1);
+        kind1.addChild(kleinkind2);
+        kind2.addChild(kleinkind3);
+        opa.addChild(kind1);
+        opa.addChild(kind2);
+
+        assertEquals(hond, opa.getGrandPets().get(0));
+        assertEquals(kat, opa.getGrandPets().get(1));
+        assertEquals(konijn, opa.getGrandPets().get(2));
+        assertEquals(kanarie, opa.getGrandPets().get(3));
+
+    }
+
+    @Test
+    void getNieces() {
+        Person opa = new Person("Hilbrand", "Smid", 60, Person.Sex.MALE);
+        Person kind1 = new Person("Henk", "Smid", 28, Person.Sex.MALE);
+        Person kleinkind1 = new Person("Jan", "Smid", 3, Person.Sex.MALE);
+        Person kleinkind2 = new Person("Petra", "Smid", 4, Person.Sex.FEMALE);
+        Person kind2 = new Person("Joke","Jansen", 26, Person.Sex.FEMALE);
+        Person kleinkind3 = new Person("Otto", "Jansen", 3, Person.Sex.MALE);
+        Person kleinkind4 = new Person("Sien", "Jansen", 5, Person.Sex.FEMALE);
+        Person kleinkind5 = new Person("Birgit", "Jansen", 5, Person.Sex.FEMALE);
+
+        kind1.addChild(kleinkind1);
+        kind1.addChild(kleinkind2);
+        kind2.addChild(kleinkind3);
+        kind2.addChild(kleinkind4);
+        kind2.addChild(kleinkind5);
+        opa.addChild(kind1);
+        opa.addChild(kind2);
+
+        assertEquals(3, opa.getNieces().size());
+        ArrayList<Person> nieces = opa.getNieces();
+        assertEquals(kleinkind2, nieces.get(0));
+        assertEquals(kleinkind4, nieces.get(1));
+        assertEquals(kleinkind5, nieces.get(2));
     }
 }

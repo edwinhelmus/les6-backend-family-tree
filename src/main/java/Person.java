@@ -122,4 +122,22 @@ public class Person {
         }
         return grandChildren;
     }
+
+    public ArrayList<Pet> getGrandPets() {
+        ArrayList<Pet> grandPets = new ArrayList<>();
+        for (Person kleinkind: getGrandChildren()) {
+            grandPets.addAll(kleinkind.getPets());
+        }
+        return grandPets;
+    }
+
+    public ArrayList<Person> getNieces() {
+        ArrayList<Person> nieces = new ArrayList<>();
+        for (Person kleinkind: getGrandChildren()) {
+            if (kleinkind.getSex() == Sex.FEMALE) {
+                nieces.add(kleinkind);
+            }
+        }
+        return nieces;
+    }
 }
