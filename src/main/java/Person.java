@@ -95,21 +95,28 @@ public class Person {
     }
 
     public void addSibling(Person sibling) {
-        siblings.add(sibling);
+        if (!siblings.contains(sibling)) {
+            siblings.add(sibling);
+        }
     }
 
     public void addChild(Person child) {
-        children.add(child);
+        if (!children.contains(child)) {
+            children.add(child);
+            child.setFather(this);
+        }
     }
 
     public void addPet(Pet pet) {
-        pets.add(pet);
-        pet.setOwner(this);
+        if (!pets.contains(pet)) {
+            pets.add(pet);
+            pet.setOwner(this);
+        }
     }
 
     public ArrayList<Person> getGrandChildren() {
 
-        ArrayList<Person> grandChildren = new ArrayList<Person>();
+        ArrayList<Person> grandChildren = new ArrayList<>();
         for (Person child : children) {
             grandChildren.addAll(child.getChildren());
         }

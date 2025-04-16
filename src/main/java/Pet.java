@@ -3,10 +3,10 @@ public class Pet {
     enum Species {CAT, DOG, BIRD, FISH, RABBIT, REPTILE, FERRET, HAMSTER};
     private String name;
     private int age;
-    private String species;
+    private Species species;
     private Person owner;
 
-    public Pet(String name, int age, String species) {
+    public Pet(String name, int age, Species species) {
         this.name = name;
         this.age = age;
         this.species = species;
@@ -28,11 +28,11 @@ public class Pet {
         this.age = age;
     }
 
-    public String getSpecies() {
+    public Species getSpecies() {
         return species;
     }
 
-    public void setSpecies(String species) {
+    public void setSpecies(Species species) {
         this.species = species;
     }
 
